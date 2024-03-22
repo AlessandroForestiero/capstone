@@ -1,0 +1,17 @@
+<div class="container">
+<app-card [events]="events"></app-card>
+
+  <input type="text" name="searchName" placeholder="filtra per nome">
+  <div class="btn-group" [ngClass]="{'show':dropdownOpen}">
+  <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="false" aria-expanded=dropdownOpen (click)="togglemenu()">
+   {{dropdownItem}}
+  </button>
+  <div class="dropdown-menu" [ngClass]="{'show':dropdownOpen}">
+    <a class="dropdown-item" (click)="moveToHeader('Luogo')">Luogo</a>
+    <a class="dropdown-item"(click)="moveToHeader('Action')" >Another action</a>
+    <a class="dropdown-item"(click)="moveToHeader('Action')">Something else here</a>
+    <div class="dropdown-divider"(click)="moveToHeader('Action')"></div>
+    <a class="dropdown-item"(click)="moveToHeader('Action')">Separated link</a>
+  </div>
+
+</div>
