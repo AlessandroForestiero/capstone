@@ -26,19 +26,21 @@ export class EventService {
     return this.http.get<iEvent[]>(this.apiUrl + `/name/${nome}` );
   }
   getEventsByType(category: string|null): Observable<iEvent[]> {
-    return this.http.get<iEvent[]>(this.apiUrl + `/type/${category}` );
+    return this.http.get<iEvent[]>(this.apiUrl + `/search/type?tipo=${category}` );
   }
-  getEventsByFilters(tipo: string | null, nome: string | null): Observable<iEvent[]> {
+  getEventsByFilters(tipoEvento:string|null, luogo:string | null, nome: string | null): Observable<iEvent[]> {
     let params = new HttpParams();
-
-    if (tipo) {
-      params = params.set('tipo', tipo);
+    if (tipoEvento) {
+      params = params.set('tipoEvento',tipoEvento);
+    }
+    if (luogo) {
+      params = params.set('luogo', luogo);
     }
     if (nome) {
       params = params.set('nome', nome);
     }
 
-    return this.http.get<iEvent[]>(this.apiUrl +'/search/', { params });
+    return this.http.get<iEvent[]>(this.apiUrl +'/search', { params });
   }
 }
 

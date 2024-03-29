@@ -5,6 +5,7 @@ import { ProfiloComponent } from './pages/profilo/profilo.component';
 import { CarrelloComponent } from './pages/carrello/carrello.component';
 import { SearchComponent } from './pages/search/search.component';
 import { CategoryComponent } from './components/category/category.component';
+import { DettagliComponent } from './pages/dettagli/dettagli.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent,title: 'Home' },
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'carrello', component: CarrelloComponent,title: 'Carrello'},
   { path: 'search', component: SearchComponent,title: 'Search'},
   {path: 'category', component: CategoryComponent,title: 'Category'},
+  {path:'dettagli', component: DettagliComponent,title: 'Dettagli'}
 ];
 
 @NgModule({

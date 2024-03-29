@@ -14,6 +14,7 @@ events: iEvent[] = [];
 
   ngOnInit(): void {
     this.loadAllEvents();
+
   }
 
   loadAllEvents(): void {
