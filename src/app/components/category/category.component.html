@@ -1,15 +1,19 @@
 <div class="container">
-  <div class="row mt-3 mb-3">
+  <div class="row justify-content-center mt-3 mb-3">
     <div class="col-md-6">
-      <input type="text" name="searchName" placeholder="Filtra per nome" [(ngModel)]="nomeEvento" class="form-control">
+      <input type="text" name="searchName" placeholder="Filtra per nome" [(ngModel)]="nomeEvento" class="form-control" (input)="filterByNameOrCity()">
     </div>
     <div class="col-md-6">
       <div class="btn-group">
+        <!-- Modifica la struttura per includere un'opzione vuota nel menu a tendina -->
         <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="false"
           aria-expanded=dropdownOpen (click)="togglemenu()">
           {{dropdownItem || 'Seleziona città'}}
         </button>
         <div class="dropdown-menu" [ngClass]="{'show': dropdownOpen}">
+          <!-- Aggiungi un'opzione vuota nel menu a tendina -->
+          <a class="dropdown-item" (click)="setCity('')">Tutte le città</a>
+          <div class="dropdown-divider"></div>
           <a class="dropdown-item" *ngFor="let luogo of luogo" (click)="moveToHeader(luogo)">{{luogo}}</a>
         </div>
         <button type="button" class="btn btn-primary" data-mdb-ripple-init (click)="filterByNameOrCity()">
@@ -19,6 +23,7 @@
     </div>
   </div>
   <app-card [events]="events"></app-card>
-
-
 </div>
+
+
+

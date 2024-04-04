@@ -15,4 +15,9 @@ export class SeatService {
       this.apiUrl + '/event/' + `${id}`
     );
   }
+  getSeatingAreaById(id: number): Observable<iSeatingArea> {
+    return this.http.get<iSeatingArea>(
+      this.apiUrl +'/' + `${id}`
+    );
+  }
 }
