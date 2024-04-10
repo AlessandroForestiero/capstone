@@ -51,6 +51,27 @@ export class CategoryComponent implements OnInit {
         this.events = data;
         console.log(this.events);
       });
+    // Verifica se la barra di ricerca è vuota dopo aver effettuato una ricerca
+    if (this.searchNome === '' && this.dropdownItem === '' && this.nomeEvento === '') {
+      // Se la barra di ricerca è vuota, ottieni tutti gli eventi
+      this.eventService.getAllEvents().subscribe((data) => {
+        this.events = data;
+        console.log(this.events);
+      });
+    } else {
+      // Altrimenti, esegui la query filtrata
+      this.eventService
+        .getEventsByFilters(this.searchNome, this.dropdownItem, this.nomeEvento)
+        .subscribe((data) => {
+          this.events = data;
+          console.log(this.events);
+        });
+    }
+  }
+  setCity(city: string) {
+    this.dropdownItem = city;
+    this.filterByNameOrCity();
+    this.dropdownOpen = false;
   }
 
   loadAllCities(): void {

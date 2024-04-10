@@ -1,7 +1,7 @@
 export interface iSeatingArea {
   id: number;
   name: string;
-  totSeats: string;
-  availableSeat: string;
+  totSeats: number;
+  availableSeats: number;
   price: number;
 }

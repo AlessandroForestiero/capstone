@@ -1,15 +1,19 @@
 import { Subscription } from 'rxjs';
 import { EventService } from './../../services/event-service';
+
 import { Component, EventEmitter, Output } from '@angular/core';
+
+
 import { iEvent } from '../../models/iEvent';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
-export class HeaderComponent {
+export class HeaderComponent  {
   showClass: boolean = false;
   searchTerm!: string;
   subscription!: Subscription;
@@ -19,7 +23,21 @@ export class HeaderComponent {
   isHovering: Boolean = false;
  @Output() eventEmitter = new EventEmitter<string>();
   categoryString!:string
-  constructor(private router: Router) {}
+
+  userName:string|undefined='';
+  constructor(private router: Router,private authSvc:AuthService) {}
+
+  ngOnInit(){
+  this.authSvc.user$.subscribe(data=>this.userName=data?.userName)
+  }
+
+  logout(){
+    this.authSvc.logout();
+
+    console.log("utente sloggato");
+
+    this.userName='';
+  }
 
   searchEventByName() {
     this.router.navigate(['/search'], {
