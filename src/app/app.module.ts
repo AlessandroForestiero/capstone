@@ -22,6 +22,7 @@ import { CategoryComponent } from './components/category/category.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { LoginComponent } from './pages/login/login.component';
 import { UserTicketsComponent } from './pages/user-tickets/user-tickets.component';
+import { JwtModule } from '@auth0/angular-jwt';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { UserTicketsComponent } from './pages/user-tickets/user-tickets.componen
     RegisterComponent,
     LoginComponent,
     UserTicketsComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -49,6 +51,7 @@ import { UserTicketsComponent } from './pages/user-tickets/user-tickets.componen
     ButtonModule,
     BrowserAnimationsModule,
     CardModule,
+    JwtModule
   ],
   providers: [],
   bootstrap: [AppComponent],

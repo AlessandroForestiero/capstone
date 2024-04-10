@@ -1,16 +1,45 @@
-<div class="container">
+<!-- <div class="container">
 <div class="row">
   <div *ngFor="let ticket of tickets" class="col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-3">
     <div class="card" style="width: 100%;">
       <img class="card-img-top" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/QR_URL_itmwiki_Main_Page.svg/1024px-QR_URL_itmwiki_Main_Page.svg.png" alt="Card image cap">
-      <div class="card-body">
-        
+      <div class="card-body" >
+
         <p class="card-text">Codice: {{ ticket.code }}</p>
-        <p class="card-text">ID Evento: {{ ticket.eventId }}</p>
-        <p class="card-text">ID Utente: {{ ticket.userId }}</p>
-        <p class="card-text">ID Area di Seduta: {{ ticket.seatingAreaId }}</p>
+        <p class="card-text"> Evento: {{ ticket.eventName }}</p>
+        <p class="card-text">Tipo biglietto/Posto a sedere: {{ ticket.seatingAreaName }}</p>
+
       </div>
     </div>
   </div>
 </div>
+</div> -->
+<div class="container">
+  <h1 class="upcoming">I tuoi tickets</h1>
+  <div *ngFor="let ticket of tickets">
+    <div class="item">
+      <div class="item-right">
+        <h2 class="num">{{ ticket.eventDate | date: 'MMM' }}</h2>
+        <p class="day">{{ ticket.eventDate | date: 'dd' }}</p>
+        <div class="up-border"></div>
+        <div class="down-border"></div>
+      </div>
+      <div class="item-left">
+        <p class="event">Evento:</p>
+        <h2 class="title">{{ ticket.eventName }}</h2>
+        <div class="sce">
+          <div class="icon">
+            <i class="fa fa-table"></i>
+          </div>
+          <div class="fix">Tipo ticket/Area seduta: {{ ticket.seatingAreaName }}</div>
+        </div>
+        <div class="fix">Prezzo: {{ ticket.price }}</div>
+        <div class="fix">Codice: {{ ticket.code }}</div>
+        <div class="fix">Data di pagamento: {{ ticket.paymentDate | date: 'dd/MM/yyyy' }}</div>
+        <!-- Immagine del codice QR -->
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/QR_URL_itmwiki_Main_Page.svg/1024px-QR_URL_itmwiki_Main_Page.svg.png" width="50px">
+      </div>
+    </div>
+  </div>
 </div>
+

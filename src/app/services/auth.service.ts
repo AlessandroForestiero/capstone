@@ -1,11 +1,11 @@
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { IAccessData } from './../models/i-access-data';
-import { LoginComponent } from './../pages/login/login.component';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, ObservableInput, map, tap } from 'rxjs';
+import { BehaviorSubject, Observable, map, tap } from 'rxjs';
 import { iUser } from '../models/iUser';
 import { iLogin } from '../models/iLogin';
-import { JwtHelperService } from '@auth0/angular-jwt';
+
 import { Router } from '@angular/router';
 
 @Injectable({

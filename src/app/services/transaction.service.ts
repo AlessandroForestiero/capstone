@@ -9,7 +9,7 @@ import { iCart } from '../models/iCart';
 })
 export class TransactionService {
   apiUrl: string = 'http://localhost:8080/purchase';
-  ticketUrl: string = 'http://localhost:8080/tickets';
+  ticketUrl: string = 'http://localhost:8080/user/tickets';
   constructor(private http: HttpClient) {}
 
   createTicket(data:iCart):Observable<iTicket>{

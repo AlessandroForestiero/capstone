@@ -1,4 +1,4 @@
-import { iUser } from "./iUser";
+
 
 export interface IAccessData {
   token: string;
