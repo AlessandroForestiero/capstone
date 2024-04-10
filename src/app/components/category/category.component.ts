@@ -1,7 +1,8 @@
+import { TipoEvento } from './../../models/tipo-evento';
 import { Subscription, catchError } from 'rxjs';
 import { EventService } from './../../services/event-service';
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { iEvent } from '../../models/iEvent';
 
 @Component({
@@ -11,60 +12,63 @@ import { iEvent } from '../../models/iEvent';
 })
 export class CategoryComponent implements OnInit {
   dropdownOpen: boolean = false;
-  dropdownItem!:string;
+  dropdownItem!: string;
   categoryName!: string | null;
   events: iEvent[] = [];
+  luogo: string[] = [];
+  nomeEvento!: string;
   subscriptions: Subscription = new Subscription();
-
+  categoriesEvents!: iEvent[];
+  searchNome!: string;
   constructor(
     private route: ActivatedRoute,
-    private eventService: EventService
+    private eventService: EventService,
+    private router: Router
   ) {}
 
-  ngOnInit(): void {
-    this.loadCategoryEvents();
-  }
+  //All'ngOnInit mi carica tutte le città comprese negli eventi esistendi e le inserisce nel dropdown "seleziona città per farne un filtro"
+  //in piu prende il parametro 'tipo' e lo assegna al metodo  getEventsByTipe per poter filtrare gli eventi in base a quel tipo.
 
-  loadCategoryEvents() {
-    this.eventService.getEventsByFilters("SPORT",null).subscribe((events) => {
-      this.events = events;
+  ngOnInit(): void {
+    this.loadAllCities();
+    this.subscriptions = this.route.queryParams.subscribe((params) => {
+      this.searchNome = params['tipo'] || null;
+      this.dropdownItem="Seleziona città";
+      this.nomeEvento = '';
+      this.dropdownItem = '';
+      this.eventService
+         .getEventsByFilters(this.searchNome, this.dropdownItem, this.nomeEvento)
+        .subscribe((data) => {
+          this.events = data;
+        });
     });
   }
- togglemenu(){
-   this.dropdownOpen =!this.dropdownOpen;
- }
- moveToHeader(item:string){
-  this.dropdownItem = item;
-  this.dropdownOpen = false;
 
- }
+  filterByNameOrCity() {
+    this.eventService
+      .getEventsByFilters(this.searchNome, this.dropdownItem, this.nomeEvento)
+      .subscribe((data) => {
+        this.events = data;
+        console.log(this.events);
+      });
+  }
 
+  loadAllCities(): void {
+    this.eventService.getAllEvents().subscribe((events) => {
+      this.luogo = events
+        .map((event) => event.luogo.toString())
+        .filter((value, index, self) => self.indexOf(value) === index);
+    });
+  }
 
-
-//   private fetchEvents(): void {
-//     if (!this.categoryName) {
-//       console.log('ciao');
-//     } else {
-//       this.subscriptions.add(
-//         this.eventService
-//           .getEventsByFilter()
-//           .pipe(
-//             catchError((error) => {
-//               console.log(error);
-//               return [];
-//             })
-//           )
-//           .subscribe((data) => {
-//             this.events = data;
-//           })
-//       );
-//     }
-//   }
-
-//   ngOnDestroy(): void {
-//     this.subscriptions.unsubscribe();
-//   }
-// }
-// function loadCategoryEvents() {
-//   throw new Error('Function not implemented.');
+  togglemenu() {
+    this.dropdownOpen = !this.dropdownOpen;
+  }
+  closeDropdown() {
+    this.dropdownOpen = false;
+  }
+  moveToHeader(item: string) {
+    this.dropdownItem = item;
+    this.dropdownOpen = false;
+  }
 }

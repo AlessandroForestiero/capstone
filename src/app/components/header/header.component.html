@@ -51,10 +51,12 @@
   (mouseleave)="toggleHover(false)" class="transition-class">
   <div class="container">
     <div class="d-flex align-items-center justify-content-between justify-content-between py-3">
-      <a [routerLink]="['/category']" class="text-light text-decoration-none">SPORT</a>
-      <a [routerLink]="['/category']" class="text-light text-decoration-none">MUSICA</a>
-      <a [routerLink]="['/category']" class="text-light text-decoration-none">TEATRO</a>
-      <a [routerLink]="['/category']" class="text-light text-decoration-none">ARTE</a>
+      <a (click)="searchEventByType('SPORT')" [routerLink]="['/category']" class="text-light text-decoration-none">SPORT</a>
+      <a (click)="searchEventByType('MUSICA')" [routerLink]="['/category']" class="text-light text-decoration-none">MUSICA</a>
+      <a (click)="searchEventByType('TEATRO')" [routerLink]="['/category']" class="text-light text-decoration-none">TEATRO</a>
+      <a (click)="searchEventByType('ARTE')" [routerLink]="['/category']" class="text-light text-decoration-none">ARTE</a>
+
+
     </div>
   </div>
 </div>
